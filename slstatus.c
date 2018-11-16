@@ -88,9 +88,9 @@ main(int argc, char *argv[])
 		status[0] = '\0';
 		for (i = len = 0; i < LEN(args); i++) {
 			const char * res = args[i].func(args[i].args);
-			res = (res == NULL) ? unknown_str : res;
-			len += snprintf(status + len, sizeof(status) - len,
-			                args[i].fmt, res);
+			if (res != NULL)
+			    len += snprintf(status + len, sizeof(status) - len,
+			                    args[i].fmt, res);
 
 			if (len >= sizeof(status)) {
 				status[sizeof(status) - 1] = '\0';
